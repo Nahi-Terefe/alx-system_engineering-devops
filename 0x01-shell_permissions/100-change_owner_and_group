@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo -R vincent:staff .
+sudo -R vincent:staff ./
