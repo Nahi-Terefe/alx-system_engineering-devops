@@ -13,3 +13,4 @@
 - 8-James_bond, set no permission to owner and group and all to other for hello file.
 - 9-John_Doe, set 752 premission to hello file
 - 10-mirror_premissions, set the permission hello file te same as olleh
+- 11-directories_permissions, recursively set executable permission for all subdirectories
