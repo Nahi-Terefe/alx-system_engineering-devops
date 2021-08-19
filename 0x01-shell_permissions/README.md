@@ -9,3 +9,4 @@
 - 4-empty, creates an empty file called hellow
 - 5-execute, add execute permission to the owener of hello file
 - 6-multiple_permissions, give and execute permission to owner and group and read for other
+- 7-everybody, gives execution permission to owner, group and other user for hello file.
