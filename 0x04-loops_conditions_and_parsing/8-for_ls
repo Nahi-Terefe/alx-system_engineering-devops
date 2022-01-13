@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2001
+#  Bash script that displays:
+#       - The content of the current directory
+#       - In a list format
+#       - Where only the part of the name after the first dash is displayed
+
+FILES=$(ls)
+for i in $FILES;
+do
+    echo "$i" | sed -e 's/^.*-//'
+done
