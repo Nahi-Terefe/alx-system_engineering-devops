@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-# server fixing
-apt-get update
-service apache2 start
+# the container and fixing whatever
+
+sudo service apache2 start
