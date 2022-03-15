@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-# Starts Apache server
-sudo service apache2 start
+# server fixing
+apt-get update
+service apache2 start
