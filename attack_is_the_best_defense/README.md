@@ -1,1 +1,1 @@
-## attack_is_the_best_defense project
+## Attack is the best defense
