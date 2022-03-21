@@ -1,6 +1,24 @@
-# Configures a custom response header
 
-exec { 'create index':
-  command  => 'sudo apt-get -y upgrade && sudo apt-get -y update && sudo apt-get -y install nginx && echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html > /dev/null && echo "Ceci n\'est pas une page" | sudo tee /var/www/html/custom_404.html > /dev/null && sudo sed -i \'/^\sserver_name.*/a \        rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\' /etc/nginx/sites-available/default && sudo sed -i \'/^\slocation.*/i \        error_page 404 /custom_404.html;\' /etc/nginx/sites-available/default && sudo sed -i \'/^\slocation.*/i \        add_header X-Served-By $hostname;\' /etc/nginx/sites-available/default && sudo service nginx start',
+# Install and config the nginx
+exec { 'update':
+  command  => 'sudo apt-get update',
   provider => shell,
+}
+
+package { 'nginx':
+  ensure  => installed,
+  require => Exec['update'],
+}
+
+file_line { 'headercustom':
+  ensure  => present,
+  path    => '/etc/nginx/sites-available/default',
+  after   => ':80 default_server;',
+  line    => "add_header X-Served-By ${hostname};",
+  require => Package['nginx'],
+}
+
+service { 'nginx':
+  ensure  => running,
+  require => File_line['headercustom'],
 }
