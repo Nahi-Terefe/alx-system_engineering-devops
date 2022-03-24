@@ -1,23 +1,18 @@
 #!/usr/bin/env bash
-# Display information about subdomains
 # shellcheck disable=SC2086
-digIt () {
-    subarg=$1
-    urlarg=$2
+# display information about subdomains
 
-    dig "$subarg.$urlarg" | grep -A1 'ANSWER SECTION:' | tail -1 | awk -v s="$subarg" 'BEGIN { FS = " " } ; { print "The subdomain " s " is a " $4 " record and points to " $5 }'
+display_info ()
+{
+    domain="$1"
+    subdomain="$2"
+    dig "$subdomain.$domain" | awk '/ANSWER SECTION:/{getline; printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' var="$subdomain"
 }
 
-allSubs=( "www" "lb-01" "web-01" "web-02" )
-
-if [ $# -eq 1 ]; then
-    url="$1"
-    for s in "${allSubs[@]}"
-    do
-	digIt "$s" "$url"
-    done
-elif [ $# -eq 2 ]; then
-    url="$1"
-    sub="$2"
-    digIt "$sub" "$url"
-fi
+for subdomain in "www" "lb-01" "web-01" "web-02"
+do
+    if [ -z "$2" ] || [ "$2" == "$subdomain" ] ;
+    then
+	display_info "$1" "$subdomain"
+    fi
+done
