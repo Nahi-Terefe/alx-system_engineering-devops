@@ -36,8 +36,7 @@ defaults
 frontend load-balancer
 	 bind	0.0.0.0:80
 	 bind	0.0.0.0:443 ssl crt /etc/letsencrypt/live/www.anytechnologies.tech/fullchain.pem
-	 mode http
-	 redirect scheme https code 301
+	 mode http	 
 	 acl letsencrypt-acl path_beg /.well-known/acme-challenge/
 	 use_backend letsencrypt-backend if letsencrypt-acl
 	 default_backend	web_servers
@@ -46,7 +45,6 @@ backend letsencrypt-backend
 	server letsencrypt 127.0.0.1:8888
 
 backend www-backend
-	redirect scheme https code 301 if !{ ssl_fc }
 	balance roundrobin
 	server 1474-web-01 3.238.179.17:80 check
 	server 1474-web-02 3.95.131.126:80 check
