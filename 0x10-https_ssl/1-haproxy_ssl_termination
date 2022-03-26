@@ -33,19 +33,17 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-frontend www-http
-	 bind *:80
-	 reqadd X-Forwarded-Proto:\ http
+frontend load-balancer
+	 bind	0.0.0.0:80
+	 bind	0.0.0.0:443 ssl crt /etc/letsencrypt/live/www.anytechnologies.tech/fullchain.pem
 	 mode http
 	 redirect scheme https code 301
-	 default_backend www-backend
+	 acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+	 use_backend letsencrypt-backend if letsencrypt-acl
+	 default_backend	web_servers
 
-frontend www-https
-        bind *:443 ssl crt /etc/letsencrypt/live/www.anytechnologies.tech/fullchain.pem
-        reqadd X-Forwarded-Proto:\ https
-	acl letsencrypt-acl path_beg /.well-known/acme-challenge/
-	use_backend letsencrypt-backend if letsencrypt-acl        
-	default_backend nodes
+backend letsencrypt-backend
+	server letsencrypt 127.0.0.1:8888
 
 backend www-backend
 	redirect scheme https code 301 if !{ ssl_fc }
