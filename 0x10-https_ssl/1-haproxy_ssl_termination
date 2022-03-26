@@ -36,6 +36,8 @@ defaults
 frontend www-http
 	 bind *:80
 	 reqadd X-Forwarded-Proto:\ http
+	 mode http
+	 redirect scheme https code 301
 	 default_backend www-backend
 
 frontend www-https
@@ -46,7 +48,8 @@ frontend www-https
 	default_backend nodes
 
 backend www-backend
-	redirect scheme https if !{ ssl_fc }
+	redirect scheme https code 301 if !{ ssl_fc }
 	balance roundrobin
 	server 1474-web-01 3.238.179.17:80 check
 	server 1474-web-02 3.95.131.126:80 check
+
