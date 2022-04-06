@@ -1,0 +1,18 @@
+what happens when you type https://www.google.com in your browser and press Enter
+
+what happens when we type the URL of a specific web address seems somehow magical and the overall process of the request-response session is mind-boggling and is quite impressive. but I will try to demystify the whole process and working mechanism with minimal technical wording as if I were explaining it to a child :). 
+ in order to understand what's going under the hood when we type www.google.com and hit the Enter key, knowing the following protocols and technology stack is critical because they are the building block of the whole internet as we know it and they help us to easily grasp the whole thing that will take place behind the scene.
+DNS request
+TCP/IP
+Firewall
+HTTPS/SSL
+Load-balancer
+Webserver
+Application server
+Database
+
+https://medium.com/@nahi.terefe/what-happens-when-you-type-https-www-google-com-in-your-browser-and-press-enter-c10451576bf8
+
+https://medium.com/@nahi.terefe/what-happens-when-you-type-https-www-google-com-in-your-browser-and-press-enter-c10451576bf8
+https://medium.com/@camilooob/what-happens-when-you-type-holbertonschool-com-in-your-browser-and-press-enter-aa2c546edad1
+https://medium.com/@maxstuart/what-happens-when-you-enter-a-website-into-your-browser-3a32e51cf0f3?sk=237eaac286771bb13aa8543e0c662019
