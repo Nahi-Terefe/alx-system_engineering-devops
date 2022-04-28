@@ -9,11 +9,17 @@
 import requests
 
 
-def number_of_subscribers(subreddit):
-    """ Get a number of subscribers"""
-    url = ('https://www.reddit.com/r/{}/about.json'.format(subreddit))
+def top_ten(subreddit):
+    """ print the title of the hottest topics """
+    url = ('https://www.reddit.com/r/{}/hot.json?limit=10'.format(subreddit))
     head = {"User-Agent": "Mozilla/5.0"}
     j_response = requests.get(url, headers=head).json()
+
     if j_response.get('error') == 404:
-        return 0
-    return j_response.get('data').get('subscribers')
+        print('None')
+    else:
+        data = j_response.get('data').get('children')
+        for i, obj in enumerate(data):
+            if i == 11:
+                break
+            print(obj.get('data').get('title'))
